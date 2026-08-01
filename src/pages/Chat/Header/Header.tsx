@@ -17,7 +17,7 @@ function Header() {
     const dispatch = useDispatch()
 
     const openGithub = () => {
-        window.open('')
+        window.open('https://github.com/Ifaz2611/Lumina-AI', '_blank')
     }
 
     return (
