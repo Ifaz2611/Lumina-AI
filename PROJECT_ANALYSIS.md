@@ -1,4 +1,4 @@
-# AI-Chat-IFAZ Project Analysis
+# Lumina AI Chat Project Analysis
 
 ## Project Overview
 This is a React/TypeScript chat UI for Google's Gemini AI model, named `google-gemini-ui`. The application allows users to interact with the Gemini model by providing an API key and optional proxy settings. It features a chat interface with message history persisted via Redux Persist, theme toggling (light/dark), and model selection.
