@@ -21,32 +21,6 @@ A modern, responsive, and feature-rich React/TypeScript chat UI designed for int
 - **Markdown**: `react-markdown`
 - **Code Quality**: ESLint, TypeScript
 
-## Project Structure
-
-```text
-AI-CHAT-IFAZ/
-├── .dockerignore
-├── .eslintrc.cjs
-├── .gitignore
-├── Caddyfile
-├── docker-compose.yaml
-├── Dockerfile
-├── index.html
-├── LICENSE
-├── package.json
-├── package-lock.json
-├── tsconfig.json
-├── vite-env.d.ts
-└── src/
-    ├── App.tsx                 # Root component & conditional routing logic
-    ├── main.tsx                # Application entry point
-    ├── components/             # Reusable UI components (Button, LoadingLine, ThemeToggle, etc.)
-    ├── pages/
-    │   ├── Chat/               # Main chat interface, header, and prompt input
-    │   └── Welcome/            # Initial setup screen for API key, proxy, and model selection
-    ├── store/                  # Redux Toolkit store and user slice (state & async thunks)
-    └── types/                  # TypeScript interfaces and type definitions
-```
 
 ## Getting Started
 
@@ -114,4 +88,4 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 ---
 
 *Made with using React, TypeScript, and Google Gemini.*
-```
+
