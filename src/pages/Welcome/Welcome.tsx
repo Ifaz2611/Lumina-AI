@@ -31,7 +31,7 @@ function Welcome() {
       <div className={`heading ${mounted ? 'mounted' : ''}`}>
         {/* <div className='badge'>
           <span className='badge-dot' />
-          Powered by Gemini
+          Powered by Gemini 2.0
         </div> */}
 
         <h1 className={showInputs ? 'small-h1' : ''}>
