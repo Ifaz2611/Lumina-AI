@@ -3,10 +3,24 @@
     align-items: center;
     justify-content: center;
     margin: 0;
+    padding: 0.5rem;
     background-color: transparent;
     border: none;
     cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--blue-color);
+        outline-offset: 2px;
+    }
+
     .theme-icon {
         color: var(--text-color);
+        transition: transform 0.3s ease, opacity 0.2s ease;
     }
 }
