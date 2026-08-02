@@ -1,3 +1,4 @@
+// Chat.tsx
 import Header from './Header'
 import PromptGenerator from './PromptGenerator'
 import './Chat.scss'
