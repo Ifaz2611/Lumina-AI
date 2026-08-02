@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../store'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import { GEMINI_MODELS } from '../../constants/models'
-import CopyCodeButton from './CopyCodeButton' // ✅ NEW
+import CopyCodeButton from './CopyCodeButton'
 
 function PromptGenerator() {
   const { 
@@ -17,7 +17,7 @@ function PromptGenerator() {
   const { selectedModel } = useSelector((state: RootState) => state.user)
   const messagesContainerRef = useRef<HTMLDivElement>(null)
 
-  // Modern Auto-Scroll: Only scrolls if user is already near the bottom
+
   useEffect(() => {
     const container = messagesContainerRef.current
     if (container) {
@@ -49,11 +49,11 @@ function PromptGenerator() {
                   className='markdown-render' 
                   remarkPlugins={[remarkGfm]}
                   components={{
-                    // Wrap code blocks (pre > code)
+
                     pre: ({ node, ...props }) => {
                       let code = '';
                       try {
-                        // Assuming the structure: pre -> code -> text
+
                         if (node && node.children && node.children.length > 0 && node.children[0].type === 'element' && node.children[0].tagName === 'code') {
                           const codeNode = node.children[0];
                           if (codeNode && codeNode.children && codeNode.children.length > 0 && codeNode.children[0].type === 'text') {
