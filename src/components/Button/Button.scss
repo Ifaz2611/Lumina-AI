@@ -1,23 +1,116 @@
-.button {
-    background-color: var(--button-background);
-    color: var(--white);
-    padding: 12px 14px;
-    border-radius: 99em;
-    font-size: 14px;
-    width: fit-content;
-    border: 1px solid transparent;
-    cursor: pointer;
-    transition: 0.2s;
-    white-space: nowrap;
+.lumina-button {
+  background-color: var(--lumina-button-background, #8ab4f8);
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 100%);
+  color: var(--lumina-white, #ffffff);
   
-    &.disabled {
-        filter: brightness(60%);
-      pointer-events: none;
+  padding: 12px 28px;
+  border-radius: 99em;
+  font-size: 14px;
+  font-weight: 600;
+  width: fit-content;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  white-space: nowrap;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  letter-spacing: 0.3px;
   
-      &:hover {
-        filter: brightness(90%);
-        transition: 0.2s;
-      }
+  &--primary {
+    background-color: var(--lumina-button-background, #8ab4f8);
+  }
+  
+
+  &--secondary {
+    background-color: transparent;
+    background-image: none;
+    color: var(--lumina-button-background, #8ab4f8);
+    border-color: var(--lumina-button-background, #8ab4f8);
+    backdrop-filter: none;
+  }
+
+  &:hover:not(.lumina-button--disabled):not(.lumina-button--loading) {
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 100%);
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06),
+      0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.3);
+    
+    &.lumina-button--secondary {
+      background-color: rgba(138, 180, 248, 0.1);
+      box-shadow: 0 4px 12px rgba(138, 180, 248, 0.15);
+      transform: translateY(-1px);
+    }
+  }
+
+
+  &:active:not(.lumina-button--disabled):not(.lumina-button--loading) {
+    transform: translateY(0);
+    box-shadow: 
+      0 2px 4px -1px rgba(0, 0, 0, 0.1),
+      0 1px 2px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.1s ease;
+    
+    &.lumina-button--secondary {
+      box-shadow: none;
+      background-color: rgba(138, 180, 248, 0.2);
+    }
+  }
+
+
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    background-image: none;
+    backdrop-filter: none;
+    transform: none;
+  }
+  
+
+  &--loading {
+    cursor: progress;
+  }
+  
+ 
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba(138, 180, 248, 0.5);
+    outline: none;
+    
+    &.lumina-button--secondary {
+      box-shadow: 0 0 0 3px rgba(138, 180, 248, 0.3);
     }
   }
   
+
+  &__spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: lumina-spin 0.8s ease-in-out infinite;
+  }
+  
+
+  &__content {
+    transition: opacity 0.2s ease;
+    
+    &--loading {
+      opacity: 0.7;
+    }
+  }
+}
+
+
+@keyframes lumina-spin {
+  to { transform: rotate(360deg); }
+}

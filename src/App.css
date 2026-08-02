@@ -6,6 +6,8 @@
   color-scheme: light dark;
   color: var(--text-color);
   background-color: var(--background-color);
+  --lumina-button-background: #1a73e8; /* Google/Lumina Blue */
+  --lumina-white: #ffffff;
 }
 
 .app-wrapper.light {
