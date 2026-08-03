@@ -165,4 +165,4 @@ docker compose up   # Then visit http://localhost:5173
 - The project uses Vite as a bundler with React TypeScript template.
 - Styling is done with SCSS modules (e.g., Button.scss, Chat.scss).
 - Redux toolkit is used for state management with persistence.
-- The application interacts directly with the Gemini API (no backend proxy needed unless using custom proxy).
+- The application interacts directly with the Gemini API (no backend proxy needed unless using custom proxy)
