@@ -1,33 +1,51 @@
-# Lumina AI Chat
+# 🌌 Lumina AI Chat
 
-A modern, responsive, and feature-rich React/TypeScript chat UI designed for interacting with Google's Gemini AI model. Lumina AI Chat provides a seamless interface for users to input their API keys, manage conversations, and enjoy a persistent, markdown-supported chat experience with built-in light/dark theme support.
+A modern, responsive, and feature-rich **React + TypeScript** chat interface built for seamless interaction with **Google’s Gemini AI models**. Lumina AI Chat offers a clean, persistent, and markdown-supported experience with light/dark theme support, making it ideal for developers, researchers, and AI enthusiasts.
 
-## Features
+---
 
-- **Gemini AI Integration**: Direct API interaction with Google's Gemini models (default: `gemini-pro`).
-- **Flexible Configuration**: Securely input your own API key and configure optional custom proxy settings.
-- **Theme Support**: Built-in light and dark mode toggle for comfortable viewing in any environment.
-- **Persistent State**: Chat history, user preferences, and settings are automatically saved and restored using Redux Persist (localStorage).
-- **Markdown Rendering**: Beautifully formatted AI responses powered by `react-markdown`.
-- **Session Management**: Easily clear chat history or log out to switch accounts/API keys.
-- **Modern UI**: Clean, accessible, and custom-built components styled with SCSS.
+## ✨ Features
 
-## Tech Stack
+- **Gemini AI Integration**  
+  Direct API interaction with Google’s Gemini models (default: `gemini-pro`).
 
-- **Framework**: React 18 with TypeScript
-- **Build Tool**: Vite
-- **State Management**: Redux Toolkit & Redux Persist
-- **Styling**: SCSS / CSS Modules
-- **Markdown**: `react-markdown`
-- **Code Quality**: ESLint, TypeScript
+- **Flexible Configuration**  
+  Securely input your own API key and optionally configure custom proxy settings.
 
+- **Theme Support**  
+  Built-in light/dark mode toggle for comfortable viewing in any environment.
 
-## Getting Started
+- **Persistent State**  
+  Chat history, user preferences, and settings are automatically saved and restored using **Redux Persist** (`localStorage`).
+
+- **Markdown Rendering**  
+  Beautifully formatted AI responses powered by `react-markdown`.
+
+- **Session Management**  
+  Clear chat history or log out to switch accounts/API keys effortlessly.
+
+- **Modern UI**  
+  Clean, accessible, and custom-built components styled with **SCSS**.
+
+---
+
+## 🛠 Tech Stack
+
+- **Framework**: React 18 + TypeScript  
+- **Build Tool**: Vite  
+- **State Management**: Redux Toolkit & Redux Persist  
+- **Styling**: SCSS / CSS Modules  
+- **Markdown Rendering**: `react-markdown`  
+- **Code Quality**: ESLint + TypeScript  
+
+---
+
+## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js (v16 or higher recommended)
-- npm, yarn, or pnpm
-- Docker & Docker Compose *(optional, for containerized deployment)*
+- Node.js (v16 or higher recommended)  
+- npm, yarn, or pnpm  
+- Docker & Docker Compose *(optional, for containerized deployment)*  
 
 ### Local Development
 
@@ -45,47 +63,66 @@ A modern, responsive, and feature-rich React/TypeScript chat UI designed for int
    ```bash
    npm start
    ```
-   The application will be available at `http://localhost:3000`.
+   The app will be available at: **http://localhost:3000**
 
-### Docker Deployment
+---
 
-To run the application in a containerized environment, ensure Docker and Docker Compose are installed, then run:
+### 🐳 Docker Deployment
+
+Run the application in a containerized environment:
 
 ```bash
 docker compose up
 ```
-The application will be accessible at `http://localhost:5173`.
 
-## Available Scripts
-
-| Script | Description |
-|--------|-------------|
-| `npm start` | Starts the Vite development server on port 3000. |
-| `npm run build` | Compiles TypeScript and builds the production-ready bundle. |
-| `npm run lint` | Runs ESLint to check for code quality, types, and formatting issues. |
-| `npm run preview` | Serves the production build locally for pre-deployment testing. |
-
-## Deployment
-
-- **Vercel**: This project is optimized and ready for seamless deployment on Vercel. Simply connect your repository to Vercel and deploy.
-- **Other Platforms**: For step-by-step deployment guides on alternative hosting platforms, refer to the [TSSFL Deployment Guide](https://www.tssfl.com/viewtopic.php?t=6778).
-
-## Roadmap & Feature Requests
-
-We are continuously improving Lumina AI Chat. Upcoming features and community requests include:
-- [ ] A more streamlined, user-friendly API key setup flow.
-- [ ] A welcoming empty state or greeting message when the chat log is empty.
-- [ ] Support for additional Gemini models and advanced model parameters (e.g., temperature, top-p).
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Contributing
-
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/your-username/lumina-ai-chat/issues) if you want to contribute.
+The app will be accessible at: **http://localhost:5173**
 
 ---
 
-*Made with using React, TypeScript, and Google Gemini.*
+## 📜 Available Scripts
 
+| Script            | Description |
+|-------------------|-------------|
+| `npm start`       | Starts the Vite development server on port 3000. |
+| `npm run build`   | Compiles TypeScript and builds the production-ready bundle. |
+| `npm run lint`    | Runs ESLint for code quality and formatting checks. |
+| `npm run preview` | Serves the production build locally for testing. |
+
+---
+
+## 🌍 Deployment
+
+- **Vercel**: Optimized for seamless deployment. Connect your repository and deploy instantly.  
+- **Other Platforms**: Refer to the [TSSFL Deployment Guide](https://www.tssfl.com/viewtopic.php?t=6778) for step-by-step instructions.  
+
+---
+
+## 🗺 Roadmap
+
+Planned improvements and community-driven features:  
+- [ ] Streamlined API key setup flow  
+- [ ] Welcoming empty state or greeting message when chat log is empty  
+- [ ] Support for additional Gemini models and advanced parameters (temperature, top-p, etc.)  
+
+---
+
+## 📄 License
+
+This project is licensed under the **Apache 2.0 License**. See the `[Looks like the result wasn't safe to show. Let's switch things up and try something else!]` file for details.
+
+---
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!  
+Check the issues page [(github.com in Bing)](https://www.bing.com/search?q="https%3A%2F%2Fgithub.com%2FIfaz2611%2FLumina-AI%2Fissues") to get started.
+
+---
+
+## 👤 Author
+
+**Developed by [Ifaz](https://github.com/Ifaz2611)**  
+
+---
+
+✨ *Made with React, TypeScript, and Google Gemini.*  
