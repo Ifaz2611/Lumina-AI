@@ -14,6 +14,7 @@ function PromptGenerator() {
     data, prompt, textareaRef, loading, error, base64File 
   } = usePromptGenerator()
   
+  
   const { selectedModel } = useSelector((state: RootState) => state.user)
   const messagesContainerRef = useRef<HTMLDivElement>(null)
 

@@ -1,8 +1,8 @@
 .auth-container {
     position: relative;
-    padding: 80px;
+    padding: 40px 48px;
     border-radius: 16px;
-    width: 80%;
+    width: min(560px, 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -25,18 +25,54 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        width: 40%;
+        width: 100%;
+        max-width: 420px;
         gap: 4px; 
         p {
             width: 100%;
             text-align: center;
         }
     }
-    .proxy-toggle {
+
+    .buttons-container {
         display: flex;
         align-items: center;
-        width: 40%;
-        gap: 14px;
-        cursor: pointer;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        width: 100%;
+        max-width: 420px;
+    }
+}
+
+// ── Mobile Responsive ────────────────────────────────────
+@media screen and (max-width: 768px) {
+    .auth-container {
+        width: 100%;
+        padding: 28px 20px;
+        gap: 16px;
+        border-radius: 16px;
+
+        .input-container,
+        .buttons-container {
+            max-width: 100%;
+        }
+
+        .buttons-container {
+            flex-direction: column;
+            align-items: stretch;
+
+            .lumina-button {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+    }
+}
+
+// ── Extra small screens ──────────────────────────────────
+@media screen and (max-width: 380px) {
+    .auth-container {
+        padding: 24px 16px;
     }
 }

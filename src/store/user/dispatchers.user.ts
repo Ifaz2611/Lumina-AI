@@ -6,7 +6,7 @@ export const generateTextContent = createAsyncThunk(
   'user/generateTextContent',
   async ({ prompt, base64File }: { prompt: string, base64File?: string | null }, thunkApi) => {
     const currentState = thunkApi.getState() as RootState
-    const { API_KEY: apiKey, proxy, conversation, selectedModel } = currentState.user
+    const { API_KEY: apiKey, conversation, selectedModel } = currentState.user
 
     const conversationParts = conversation.data && conversation.data.length > 0
       ? conversation.data.slice(0, -1).map(entry => ({ text: entry.message }))
@@ -28,7 +28,7 @@ export const generateTextContent = createAsyncThunk(
     console.log('Request Body:', requestBody)
 
     const response = await fetch(
-      `${proxy ? proxy : ''}https://generativelanguage.googleapis.com/v1beta/models/${selectedModel}:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/${selectedModel}:generateContent?key=${apiKey}`,
       {
         method: 'POST',
         headers: {

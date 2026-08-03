@@ -327,3 +327,67 @@
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+// ── Mobile Responsive ────────────────────────────────────
+@media screen and (max-width: 768px) {
+  .chat-page-container {
+    .conversation-container {
+      .messages-container {
+        padding: 16px 14px;
+        gap: 18px;
+
+        .message-wrapper {
+          max-width: 92%;
+        }
+
+        .message-bubble {
+          padding: 12px 14px;
+          border-radius: 16px;
+        }
+
+        .error-message {
+          max-width: 100%;
+          padding: 10px 14px;
+        }
+      }
+
+      .message-input-container {
+        padding: 12px 10px 16px;
+        gap: 8px;
+
+        .input-wrapper {
+          border-radius: 22px;
+          padding: 6px 12px;
+
+          .prompt-input {
+            font-size: 16px;
+            max-height: 120px;
+          }
+
+          .file-selector-label {
+            width: 40px;
+            height: 40px;
+          }
+        }
+
+        .send-button {
+          height: 44px;
+          min-width: 44px;
+        }
+      }
+    }
+  }
+}
+
+// ── Extra small screens ──────────────────────────────────
+@media screen and (max-width: 400px) {
+  .chat-page-container {
+    .conversation-container {
+      .messages-container {
+        .message-wrapper {
+          max-width: 96%;
+        }
+      }
+    }
+  }
+}

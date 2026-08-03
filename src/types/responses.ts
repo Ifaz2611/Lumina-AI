@@ -30,7 +30,6 @@ export interface textResponse {
       error?: string
       data?: Message[]
     },
-    proxy?: string
     selectedModel: string
     theme: 'dark' | 'light'
   }

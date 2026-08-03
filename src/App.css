@@ -39,10 +39,20 @@ input, textarea {
   border-radius: 99em;
   transition: background-color 0.3s, border-color 0.3s, opacity 0.4s;
   box-sizing: border-box;
+  font-size: 16px;
+  -webkit-appearance: none;
+  appearance: none;
 
   &:focus {
     outline: none;
     background-color: var(--input-focus-background);
     border-color: var(--input-focus-border);
+  }
+}
+
+/* Prevent iOS auto-zoom when focusing inputs */
+@media screen and (max-width: 768px) {
+  input, textarea {
+    font-size: 16px;
   }
 }

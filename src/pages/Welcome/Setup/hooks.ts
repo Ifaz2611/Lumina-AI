@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux"
 export const useSetup = () => {
     const [name, setName] = useState<string>('')
     const [API_KEY, setAPI_KEY] = useState<string>('')
-    const [proxy, setProxy] = useState('')
     const [showApiError, setShowApiError] = useState(false)
 
     const dispatch = useDispatch()
@@ -18,21 +17,17 @@ export const useSetup = () => {
         setAPI_KEY(e.target.value)
     }
 
-    const handleProxyChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setProxy(e.target.value)
-    }
-
     const handleSubmit = () => {
         if (API_KEY.length === 0) {
             setShowApiError(true)
             return
         }
-        dispatch(setUser({ name, API_KEY, proxy }))
+        dispatch(setUser({ name, API_KEY }))
     }
 
     const getAPI = () => {
-        window.open('https://makersuite.google.com/app/apikey')
+        window.open('https://aistudio.google.com/app/api-keys')
     }
 
-    return { handleNameChange, handleApiKeyChange, handleSubmit, getAPI, name, API_KEY, showApiError, handleProxyChange, proxy }
+    return { handleNameChange, handleApiKeyChange, handleSubmit, getAPI, name, API_KEY, showApiError }
 }
