@@ -9,12 +9,13 @@ function Setup() {
     return (
         <div className={`auth-container ${API_KEY ? 'active' : ''}`}>
             <div className='input-container'>
-                <span>Your Name</span>
+                <span>Name</span>
                 <input
                     type='text'
                     id='name'
                     value={name}
                     autoComplete='off'
+                    placeholder='Full name'
                     onChange={handleNameChange}
                 />
             </div>
@@ -25,6 +26,7 @@ function Setup() {
                     id='apiKey'
                     value={API_KEY}
                     autoComplete='new-password'
+                    placeholder='Add your Gemini api keys'
                     onChange={handleApiKeyChange}
                 />
                 {showApiError && <p>You need to provide valid API Key! Get it using the left button.</p>}
