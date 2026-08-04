@@ -108,7 +108,7 @@ Planned improvements and community-driven features:
 
 ## 📄 License
 
-This project is licensed under the **Apache 2.0 License**. See the `[Looks like the result wasn't safe to show. Let's switch things up and try something else!]` file for details.
+This project is licensed under the **Apache 2.0 License**. See the `[:)]` file for details.
 
 ---
 
