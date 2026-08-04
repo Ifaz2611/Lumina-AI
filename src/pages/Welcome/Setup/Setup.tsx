@@ -33,7 +33,7 @@ function Setup() {
             </div>
             <div className='buttons-container'>
                 <Button className='start-button secondary' onClick={getAPI}>Get Free API Key</Button>
-                <Button className='start-button' onClick={handleSubmit}>Start using Gemini</Button>
+                <Button className='start-button' onClick={handleSubmit}>Start using lumina</Button>
             </div>
         </div>
     )
