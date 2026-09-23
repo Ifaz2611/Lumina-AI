@@ -3,45 +3,46 @@
 
 <head>
   <meta charset="UTF-8" />
-  <!-- Google Tag Manager -->
-  <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-WKMLVTV5');
-  </script>
-  <!-- End Google Tag Manager -->
-  <link rel="icon" type="image/svg+xml" href="https://ai.google.dev/static/images/cloud-icon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="canonical" href="https://example.com/" />
-  <!-- Renamed Project & Updated Metadata -->
+  <link rel="icon" type="image/svg+xml" href="https://ai.google.dev/static/images/cloud-icon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#096EFF" />
+  <link rel="canonical" href="https://lumina-ai.example.com/" />
   <meta name="description" content="Explore Lumina AI Chat - a seamless, interactive, and next-generation experience powered by advanced artificial intelligence." />
   <meta name="keywords" content="Lumina, AI, chat, artificial intelligence, virtual assistant, user interface, machine learning" />
   <meta name="author" content="Ifaz Md Zahin" />
   <!-- Open Graph / Facebook -->
-  <!-- REPLACE og:url AND twitter:url WITH ACTUAL URL -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://example.com/">
+  <meta property="og:url" content="https://lumina-ai.example.com/">
   <meta property="og:title" content="Lumina AI Chat">
   <meta property="og:description" content="Explore Lumina AI Chat - a seamless, interactive, and next-generation experience powered by advanced artificial intelligence.">
   <meta property="og:image" content="https://ai.google.dev/static/images/cloud-icon.svg">
   <meta property="og:site_name" content="Lumina AI Chat">
-
-  <!-- Twitter -- X now -->
+  <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://example.com/">
+  <meta property="twitter:url" content="https://lumina-ai.example.com/">
   <meta property="twitter:title" content="Lumina AI Chat">
   <meta property="twitter:description" content="Explore Lumina AI Chat - a seamless, interactive, and next-generation experience powered by advanced artificial intelligence.">
   <meta property="twitter:image" content="https://ai.google.dev/static/images/cloud-icon.svg">
+  <!-- Analytics is opt-in: only load GTM if localStorage consent granted. See src/utils/analytics.ts -->
+  <script>
+    (function() {
+      try {
+        if (localStorage.getItem('lumina_analytics_consent') === 'granted') {
+          var s=document.createElement('script'); s.async=true; s.src='https://www.googletagmanager.com/gtm.js?id=GTM-WKMLVTV5';
+          document.head.appendChild(s);
+        }
+      } catch(e) {}
+    })();
+  </script>
 </head>
 
 <body>
   <div id="root"></div>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WKMLVTV5"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
+  <noscript>
+    <p style="text-align:center;padding:1rem">Lumina AI requires JavaScript to run.</p>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WKMLVTV5" height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe>
+  </noscript>
   
   <!-- Vite/React Entry Point -->
   <script type="module" src="/src/main.tsx"></script>

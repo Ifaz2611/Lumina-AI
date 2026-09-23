@@ -9,7 +9,7 @@ function App() {
   const { API_KEY, theme } = useSelector((state: RootState) => state.user)
 
   return (
-    <main className={`app-wrapper ${theme === 'light' ? 'light' : 'dark'}`}>
+    <main className={`app-wrapper ${theme}`}>
       {API_KEY ? 
         <Chat />
         :

@@ -34,4 +34,3 @@ dist-ssr
 # Env
 .env
 .env.local
-myself.md

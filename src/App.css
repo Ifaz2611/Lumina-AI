@@ -10,20 +10,6 @@
   --lumina-white: #ffffff;
 }
 
-.app-wrapper.light {
-  --background-color: #eaeaea;
-  --text-color: #080808;
-  --input-background: rgba(198, 198, 198, 0.1);
-  --input-border: 1px solid rgba(191, 191, 191, 0.5);
-  --input-focus-background: rgba(229, 229, 229, 0.1);
-  --input-focus-border: rgba(0, 0, 0, 0.5);
-  --light-border: 1px solid rgba(8, 8, 8, 0.4);
-  --setup-background: #efefeff5;
-  --setup-border: 1px solid rgba(8, 8, 8, 0.24);
-  --gemini-font-color: linear-gradient(60deg, #598FF0, #096EFF);
-  --text-color-white: #ffffff;
-}
-
 .app-wrapper {
   background-color: var(--background-color);
   color: var(--text-color);

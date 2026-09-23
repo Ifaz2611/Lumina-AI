@@ -14,5 +14,18 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          markdown: ['react-markdown', 'remark-gfm'],
+          redux: ['@reduxjs/toolkit', 'react-redux', 'redux-persist'],
+        },
+      },
+    },
   },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './src/test/setup.ts',
+  } as unknown as Record<string, unknown>,
 })
