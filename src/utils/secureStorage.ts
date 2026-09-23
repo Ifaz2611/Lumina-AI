@@ -7,30 +7,53 @@ export const secureStorage = {
     try {
       // Prefer env fallback handled elsewhere; here just session
       return sessionStorage.getItem(SESSION_KEY) || ''
-    } catch { return '' }
+    } catch {
+      return ''
+    }
   },
   setApiKey(key: string) {
-    try { sessionStorage.setItem(SESSION_KEY, key) } catch {}
+    try {
+      sessionStorage.setItem(SESSION_KEY, key)
+    } catch {}
   },
   clearApiKey() {
-    try { sessionStorage.removeItem(SESSION_KEY) } catch {}
+    try {
+      sessionStorage.removeItem(SESSION_KEY)
+    } catch {}
   },
   getName(): string {
-    try { return sessionStorage.getItem(SESSION_NAME) || '' } catch { return '' }
+    try {
+      return sessionStorage.getItem(SESSION_NAME) || ''
+    } catch {
+      return ''
+    }
   },
   setName(name: string) {
-    try { sessionStorage.setItem(SESSION_NAME, name) } catch {}
+    try {
+      sessionStorage.setItem(SESSION_NAME, name)
+    } catch {}
   },
   clearName() {
-    try { sessionStorage.removeItem(SESSION_NAME) } catch {}
+    try {
+      sessionStorage.removeItem(SESSION_NAME)
+    } catch {}
   },
   clearAll() {
-    try { sessionStorage.removeItem(SESSION_KEY); sessionStorage.removeItem(SESSION_NAME) } catch {}
-  }
+    try {
+      sessionStorage.removeItem(SESSION_KEY)
+      sessionStorage.removeItem(SESSION_NAME)
+    } catch {}
+  },
 }
 
 // Helper to check if env key exists
 export const getEnvApiKey = (): string => {
   // Vite exposes VITE_ prefixed envs
-  try { return (import.meta as unknown as { env: Record<string,string> }).env?.VITE_GEMINI_API_KEY || '' } catch { return '' }
+  try {
+    return (
+      (import.meta as unknown as { env: Record<string, string> }).env?.VITE_GEMINI_API_KEY || ''
+    )
+  } catch {
+    return ''
+  }
 }

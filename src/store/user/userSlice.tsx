@@ -21,7 +21,7 @@ const initialUserState: UserState = {
   conversation: {
     loading: false,
     error: undefined,
-    data: []
+    data: [],
   },
   conversations: { [defaultConv.id]: defaultConv },
   activeConversationId: defaultConv.id,
@@ -89,7 +89,8 @@ const userSlice = createSlice({
       }
     },
     renameConversation: (state, action: PayloadAction<{ id: string; title: string }>) => {
-      if (state.conversations[action.payload.id]) state.conversations[action.payload.id].title = action.payload.title
+      if (state.conversations[action.payload.id])
+        state.conversations[action.payload.id].title = action.payload.title
     },
     deleteConversation: (state, action: PayloadAction<string>) => {
       delete state.conversations[action.payload]
@@ -121,14 +122,18 @@ const userSlice = createSlice({
     deleteMessage: (state, action: PayloadAction<number>) => {
       state.conversation.data?.splice(action.payload, 1)
       if (state.activeConversationId && state.conversations[state.activeConversationId]) {
-        state.conversations[state.activeConversationId].messages = [...(state.conversation.data || [])]
+        state.conversations[state.activeConversationId].messages = [
+          ...(state.conversation.data || []),
+        ]
       }
     },
     editMessage: (state, action: PayloadAction<{ index: number; message: string }>) => {
       const msg = state.conversation.data?.[action.payload.index]
       if (msg) msg.message = action.payload.message
       if (state.activeConversationId && state.conversations[state.activeConversationId]) {
-        state.conversations[state.activeConversationId].messages = [...(state.conversation.data || [])]
+        state.conversations[state.activeConversationId].messages = [
+          ...(state.conversation.data || []),
+        ]
       }
     },
     appendStreamChunk: (state, action: PayloadAction<string>) => {
@@ -144,18 +149,26 @@ const userSlice = createSlice({
         })
       }
       if (state.activeConversationId && state.conversations[state.activeConversationId]) {
-        state.conversations[state.activeConversationId].messages = [...(state.conversation.data || [])]
+        state.conversations[state.activeConversationId].messages = [
+          ...(state.conversation.data || []),
+        ]
       }
     },
   },
   extraReducers: (builder) => {
     const syncActive = (state: UserState) => {
       if (state.activeConversationId && state.conversations[state.activeConversationId]) {
-        state.conversations[state.activeConversationId].messages = [...(state.conversation.data || [])]
+        state.conversations[state.activeConversationId].messages = [
+          ...(state.conversation.data || []),
+        ]
         // auto-title from first user message
-        if (state.conversations[state.activeConversationId].title === 'New chat' && state.conversation.data?.[0]) {
-          const firstUser = state.conversation.data.find(m => m.type === 'outbound')
-          if (firstUser) state.conversations[state.activeConversationId].title = firstUser.message.slice(0, 32)
+        if (
+          state.conversations[state.activeConversationId].title === 'New chat' &&
+          state.conversation.data?.[0]
+        ) {
+          const firstUser = state.conversation.data.find((m) => m.type === 'outbound')
+          if (firstUser)
+            state.conversations[state.activeConversationId].title = firstUser.message.slice(0, 32)
         }
       }
     }
@@ -188,12 +201,17 @@ const userSlice = createSlice({
           timestamp: new Date().toISOString(),
           role: 'model',
         })
-        state.lastPrompt = { prompt: action.meta.arg.prompt, base64File: action.meta.arg.base64File ?? null, mimeType: action.meta.arg.mimeType }
+        state.lastPrompt = {
+          prompt: action.meta.arg.prompt,
+          base64File: action.meta.arg.base64File ?? null,
+          mimeType: action.meta.arg.mimeType,
+        }
         syncActive(state)
       })
       .addCase(generateTextContent.rejected, (state, action) => {
         state.conversation.loading = false
-        state.conversation.error = (action.payload as string) || action.error.message || 'Error generating content'
+        state.conversation.error =
+          (action.payload as string) || action.error.message || 'Error generating content'
       })
       // Streaming reducers handle optimistic push via pending, chunks via appendStreamChunk handled outside, fulfilled just clears loading
       .addCase(generateStreamContent.pending, (state, action) => {
@@ -213,7 +231,11 @@ const userSlice = createSlice({
         if (last && last.type === 'inbound' && !last.message && action.payload?.text) {
           last.message = action.payload.text
         }
-        state.lastPrompt = { prompt: action.meta.arg.prompt, base64File: action.meta.arg.base64File ?? null, mimeType: action.meta.arg.mimeType }
+        state.lastPrompt = {
+          prompt: action.meta.arg.prompt,
+          base64File: action.meta.arg.base64File ?? null,
+          mimeType: action.meta.arg.mimeType,
+        }
         syncActive(state)
       })
       .addCase(generateStreamContent.rejected, (state, action) => {
@@ -221,10 +243,26 @@ const userSlice = createSlice({
         // remove empty streaming bubble if failed
         const last = state.conversation.data?.[state.conversation.data.length - 1]
         if (last && last.type === 'inbound' && !last.message) state.conversation.data?.pop()
-        state.conversation.error = (action.payload as string) || action.error.message || 'Streaming error'
+        state.conversation.error =
+          (action.payload as string) || action.error.message || 'Streaming error'
       })
   },
 })
 
-export const { setUser, clearUser, clearChat, createConversation, switchConversation, renameConversation, deleteConversation, setTheme, setSelectedModel, setGenerationConfig, setSystemInstruction, deleteMessage, editMessage, appendStreamChunk } = userSlice.actions
+export const {
+  setUser,
+  clearUser,
+  clearChat,
+  createConversation,
+  switchConversation,
+  renameConversation,
+  deleteConversation,
+  setTheme,
+  setSelectedModel,
+  setGenerationConfig,
+  setSystemInstruction,
+  deleteMessage,
+  editMessage,
+  appendStreamChunk,
+} = userSlice.actions
 export default userSlice.reducer

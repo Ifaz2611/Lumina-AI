@@ -2,10 +2,10 @@ export interface textResponse {
   candidates: Array<{
     content: {
       parts: Array<{
-        text?: string;
+        text?: string
         inlineData?: {
-          mimeType: string;
-          data: string;
+          mimeType: string
+          data: string
         }
       }>
     }
@@ -56,4 +56,3 @@ export interface UserState {
   lastPrompt: { prompt: string; base64File: string | null; mimeType?: string } | null
   systemInstruction: string
 }
-  

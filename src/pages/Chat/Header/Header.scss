@@ -1,204 +1,286 @@
+// ── Header 2.0 — blurred, slim, editorial
 .header {
-    width: 100%;
+  height: 56px;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 16px 0 20px;
+  background: color-mix(in srgb, var(--bg-surface) 85%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--divider);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  flex-shrink: 0;
+
+  .brand {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 1rem 5%;
-    background-color: var(--setup-background);
-    border-bottom: 1px solid var(--light-border);
-    transition: all 0.3s ease;
+    gap: 10px;
+    min-width: 0;
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #7c3aed 0%, #6366f1 55%, #06b6d4 100%);
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: -0.02em;
+      box-shadow: 0 4px 14px rgba(124, 58, 237, 0.3);
+      flex-shrink: 0;
+    }
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+      min-width: 0;
+      strong {
+        font-family: var(--font-display);
+        font-size: 14.5px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--text);
+        white-space: nowrap;
+      }
+      span {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--text-tertiary);
+        white-space: nowrap;
+      }
+    }
+  }
+
+  .header-greeting {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+  }
+
+  .header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+
+    .icon-button {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-pill);
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-secondary);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: all var(--dur-fast) var(--ease-smooth);
+      &:hover {
+        background: var(--bg-muted);
+        color: var(--text);
+        border-color: var(--border);
+      }
+      &:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+    }
+    .clear-button:hover {
+      color: var(--danger);
+      background: rgba(239, 68, 68, 0.08);
+      border-color: rgba(239, 68, 68, 0.18);
+    }
+    .github-button:hover {
+      color: var(--text);
+    }
+  }
+
+  // Model selector
+  .model-selector {
     position: relative;
-    z-index: 100;
-
-    .header-greeting {
-        font-size: 1rem;
-        color: var(--text-color);
+  }
+  .model-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: var(--radius-pill);
+    background: var(--bg-muted);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all var(--dur-fast) var(--ease-smooth);
+    &:hover {
+      background: var(--bg-surface-hover);
+      border-color: var(--border-strong);
+    }
+    &:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .model-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+      flex-shrink: 0;
+    }
+  }
+  .model-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    min-width: 300px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 14px;
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: var(--z-dropdown);
+    animation: slideDownSm 0.2s var(--ease-spring);
+    select {
+      width: 100%;
+      padding: 9px 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text);
+      font-size: 13.5px;
+      outline: none;
+      &:focus {
+        border-color: var(--border-focus);
+        box-shadow: 0 0 0 3px var(--accent-soft);
+      }
+    }
+    .gen-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      label {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
         font-weight: 500;
-
-        
-
-        strong {
-            color: var(--blue-color);
+        color: var(--text);
+        span {
+          font-size: 12px;
+          color: var(--text-secondary);
+          font-weight: 500;
         }
-    }
-
-    .user-name {
-            font-size: 20px;
-            font-weight: 600;
-    }
-
-    .header-buttons {
+      }
+      input[type='range'] {
+        width: 100%;
+        accent-color: var(--accent);
+        height: 4px;
+      }
+      .stream-row {
         display: flex;
         align-items: center;
-        gap: 0.75rem;
-
-        .icon-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 50%;
-            color: var(--text-color);
-            transition: all 0.2s ease;
-
-            &:hover {
-                background-color: rgba(var(--blue-color-rgb), 0.1);
-                transform: scale(1.1);
-            }
-
-            &:focus-visible {
-                outline: 2px solid var(--blue-color);
-                outline-offset: 2px;
-            }
+        gap: 8px;
+        padding: 8px 10px;
+        border-radius: var(--radius-sm);
+        background: var(--bg-muted);
+        border: 1px solid var(--border);
+        font-size: 13px;
+        font-weight: 500;
+        input {
+          accent-color: var(--accent);
         }
-
-        .github-button:hover {
-            color: #333;
-        }
-
-        .clear-button:hover {
-            color: #ff4444;
-        }
+      }
+      .hint {
+        font-size: 11.5px;
+        color: var(--text-tertiary);
+        line-height: 1.4;
+      }
     }
+  }
 
-    // Model Selector
-    .model-selector { position: relative; }
+  .hamburger-menu {
+    display: none;
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border);
+    background: var(--bg-surface);
+    color: var(--text);
+    display: none;
+    place-items: center;
+    cursor: pointer;
+  }
+
+  .mobile-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg-elevated);
+    border-bottom: 1px solid var(--border);
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: var(--shadow-lg);
+    animation: slideDownSm 0.22s var(--ease-spring);
+    z-index: var(--z-dropdown);
+
     .model-badge {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 1rem;
-        background-color: var(--setup-background);
-        color: var(--text-color);
-        border: 1px solid var(--light-border);
-        border-radius: 12px;
-        font-size: 0.9rem;
-        font-weight: 500;
-        cursor: pointer;
-        &:focus-visible { outline: 2px solid var(--blue-color); outline-offset: 2px; }
+      width: 100%;
+      justify-content: center;
     }
-    .model-dropdown {
-        position: absolute;
-        top: calc(100% + 8px);
-        left: 0;
-        min-width: 280px;
-        background: var(--setup-background);
-        border: 1px solid var(--light-border);
-        border-radius: 12px;
-        padding: 12px;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        z-index: 120;
-        select { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid var(--light-border); background: var(--input-background); color: var(--text-color); }
-        .gen-controls { display:flex; flex-direction:column; gap:8px; font-size:0.85rem;
-          label { display:flex; flex-direction:column; gap:4px; }
-          input[type="range"] { width: 100%; }
-        }
-        .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    .icon-button {
+      width: 100%;
+      justify-content: flex-start;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
     }
-
-    .hamburger-menu {
-        display: none;
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        padding: 0.5rem;
-        border-radius: 50%;
-        color: var(--text-color);
-        transition: all 0.2s ease;
-
-        &:hover {
-            background-color: rgba(var(--blue-color-rgb), 0.1);
-        }
-
-        &:focus-visible {
-            outline: 2px solid var(--blue-color);
-            outline-offset: 2px;
-        }
-    }
-
-    // Mobile Menu
-    .mobile-menu {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background-color: var(--setup-background);
-        border-bottom: 1px solid var(--light-border);
-        padding: 1rem;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        animation: slideDown 0.3s ease;
-        z-index: 100;
-
-        .model-badge {
-            width: 100%;
-            justify-content: center;
-        }
-    }
-
-    @keyframes slideDown {
-        from { opacity: 0; transform: translateY(-20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
+  }
 }
 
-// Mobile Responsiveness
-@media screen and (max-width: 768px) {
-    .header {
-        padding: 0.75rem 1rem;
-
-        .header-greeting {
-            font-size: 0.9rem;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .header-buttons {
-            display: none;
-        }
-
-        .hamburger-menu {
-            display: flex;
-        }
-
-        .mobile-menu {
-            padding: 0.75rem 1rem 1rem;
-            gap: 0.5rem;
-
-            .model-badge {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .icon-button {
-                width: 100%;
-                justify-content: flex-start;
-                gap: 0.75rem;
-                padding: 0.75rem;
-                border-radius: 10px;
-                font-size: 0.9rem;
-            }
-
-            .theme-toggle-container {
-                width: 100%;
-                justify-content: flex-start;
-                padding: 0.5rem 0.75rem;
-                border-radius: 10px;
-            }
-
-            .lumina-button {
-                width: 100%;
-                max-width: 100%;
-            }
-        }
+@media (max-width: 860px) {
+  .header {
+    padding: 0 12px;
+    .header-greeting {
+      display: none;
     }
+    .brand .brand-text {
+      display: none;
+    }
+  }
+}
+@media (max-width: 768px) {
+  .header {
+    .header-buttons {
+      display: none;
+    }
+    .hamburger-menu {
+      display: grid;
+    }
+  }
 }

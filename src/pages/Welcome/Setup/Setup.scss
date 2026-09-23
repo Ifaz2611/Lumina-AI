@@ -1,78 +1,194 @@
+// ── Setup — premium card ───────────────────────────────
 .auth-container {
-    position: relative;
-    padding: 40px 48px;
-    border-radius: 16px;
-    width: min(560px, 100%);
+  position: relative;
+  width: min(520px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 28px 28px 24px;
+  border-radius: var(--radius-lg);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  text-align: left;
+  animation: riseCard 0.45s var(--ease-spring) both;
+
+  // top highlight line
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 72%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.35), transparent);
+    border-radius: 999px;
+  }
+
+  .auth-header {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 18px;
-    background: var(--setup-background);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+    gap: 6px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--divider);
+    padding-bottom: 14px;
+    h2 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    p {
+      margin: 0;
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+  }
 
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 100%;
 
-    &.active {
-        box-shadow: 0 0 10px rgba(89, 143, 240, 0.5);
-        transition: 0.4s;
-        bottom: 0;
-        opacity: 1;
+    label {
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      .optional {
+        font-weight: 400;
+        text-transform: none;
+        letter-spacing: 0;
+        font-size: 12px;
+        color: var(--text-tertiary);
+        background: var(--bg-muted);
+        padding: 2px 8px;
+        border-radius: var(--radius-pill);
+      }
     }
 
-    .input-container {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        width: 100%;
-        max-width: 420px;
-        gap: 4px; 
-        p {
-            width: 100%;
-            text-align: center;
-        }
+    input {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg-input);
+      color: var(--text);
+      font-size: 14.5px;
+      font-weight: 400;
+      outline: none;
+      transition:
+        border-color var(--dur-fast) var(--ease-smooth),
+        box-shadow var(--dur-fast) var(--ease-smooth),
+        background var(--dur-fast) var(--ease-smooth);
+      &::placeholder {
+        color: var(--text-tertiary);
+      }
+      &:hover {
+        border-color: var(--border-strong);
+      }
+      &:focus {
+        border-color: var(--border-focus);
+        box-shadow: 0 0 0 3px var(--accent-soft);
+        background: var(--bg-surface);
+      }
+      &[aria-invalid='true'] {
+        border-color: var(--danger);
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+      }
     }
 
+    #api-error {
+      margin: 0;
+      font-size: 12.5px;
+      color: var(--danger);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      &::before {
+        content: '⚠';
+        font-size: 11px;
+      }
+    }
+
+    .hint {
+      margin: 0;
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--text-tertiary);
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+      background: var(--bg-muted);
+      border: 1px solid var(--divider);
+      padding: 8px 10px;
+      border-radius: var(--radius-xs);
+    }
+  }
+
+  .buttons-container {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-top: 4px;
+
+    .lumina-button,
+    .start-button {
+      flex: 1;
+      min-width: 0;
+      justify-content: center;
+      border-radius: var(--radius-pill) !important;
+      padding: 13px 18px !important;
+      font-size: 14px !important;
+      font-weight: 600 !important;
+    }
+  }
+
+  .auth-footer {
+    text-align: center;
+    font-size: 11.5px;
+    color: var(--text-tertiary);
+    padding-top: 10px;
+    border-top: 1px solid var(--divider);
+    a {
+      color: var(--text-secondary);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      &:hover {
+        color: var(--accent);
+      }
+    }
+  }
+}
+
+@keyframes riseCard {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 640px) {
+  .auth-container {
+    padding: 22px 18px 18px;
+    border-radius: var(--radius-md);
     .buttons-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-        flex-wrap: wrap;
-        width: 100%;
-        max-width: 420px;
+      flex-direction: column;
     }
-}
-
-// ── Mobile Responsive ────────────────────────────────────
-@media screen and (max-width: 768px) {
-    .auth-container {
-        width: 100%;
-        padding: 28px 20px;
-        gap: 16px;
-        border-radius: 16px;
-
-        .input-container,
-        .buttons-container {
-            max-width: 100%;
-        }
-
-        .buttons-container {
-            flex-direction: column;
-            align-items: stretch;
-
-            .lumina-button {
-                width: 100%;
-                max-width: 100%;
-            }
-        }
-    }
-}
-
-// ── Extra small screens ──────────────────────────────────
-@media screen and (max-width: 380px) {
-    .auth-container {
-        padding: 24px 16px;
-    }
+  }
 }

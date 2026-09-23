@@ -9,12 +9,14 @@ const getApiKey = (stateKey: string) => stateKey?.trim() || getEnvApiKey()?.trim
 
 const mapErrorMessage = (status: number, apiMessage?: string) => {
   if (apiMessage) {
-    if (status === 401 || status === 403) return `Authentication failed ( ${status}): ${apiMessage}. Please check your API key.`
+    if (status === 401 || status === 403)
+      return `Authentication failed ( ${status}): ${apiMessage}. Please check your API key.`
     if (status === 429) return `Rate limited (429): ${apiMessage}. Please wait a moment and retry.`
     if (status >= 500) return `Server error (${status}): ${apiMessage}. Retrying may help.`
     return apiMessage
   }
-  if (status === 401 || status === 403) return 'Invalid API key. Please sign out and enter a new key.'
+  if (status === 401 || status === 403)
+    return 'Invalid API key. Please sign out and enter a new key.'
   if (status === 429) return 'Too many requests. Please wait 30s before trying again.'
   if (status === 400) return 'Bad request - check your prompt and try again.'
   if (status >= 500) return 'Gemini service temporarily unavailable.'
@@ -25,7 +27,7 @@ const mapErrorMessage = (status: number, apiMessage?: string) => {
 let requestTimestamps: number[] = []
 const checkRateLimit = () => {
   const now = Date.now()
-  requestTimestamps = requestTimestamps.filter(t => now - t < 60000)
+  requestTimestamps = requestTimestamps.filter((t) => now - t < 60000)
   if (requestTimestamps.length >= 6) {
     const oldest = requestTimestamps[0]
     const waitSec = Math.ceil((60000 - (now - oldest)) / 1000)
@@ -43,7 +45,10 @@ const buildContents = (
 ) => {
   // Build role-aware history; exclude the optimistic last outbound already pushed in pending reducer
   const history = (conversationData || []).slice(0, -1)
-  const contents: Array<{ role: 'user' | 'model'; parts: Array<{ text?: string; inlineData?: { mimeType: string; data: string } }> }> = []
+  const contents: Array<{
+    role: 'user' | 'model'
+    parts: Array<{ text?: string; inlineData?: { mimeType: string; data: string } }>
+  }> = []
 
   // Optional system instruction as first user message
   if (systemInstruction?.trim()) {
@@ -52,12 +57,14 @@ const buildContents = (
   }
 
   for (const m of history) {
-    const role = m.type === 'inbound' ? 'model' as const : 'user' as const
+    const role = m.type === 'inbound' ? ('model' as const) : ('user' as const)
     contents.push({ role, parts: [{ text: m.message }] })
   }
 
   // Current prompt
-  const currentParts: Array<{ text?: string; inlineData?: { mimeType: string; data: string } }> = [{ text: prompt }]
+  const currentParts: Array<{ text?: string; inlineData?: { mimeType: string; data: string } }> = [
+    { text: prompt },
+  ]
   if (base64File) {
     currentParts.push({ inlineData: { mimeType: mimeType || 'image/jpeg', data: base64File } })
   }
@@ -73,7 +80,7 @@ async function fetchWithRetry(url: string, init: RequestInit, maxRetries = 2): P
       // retry only on 429/5xx
       if (res.status === 429 || res.status >= 500) {
         if (attempt < maxRetries) {
-          await new Promise(r => setTimeout(r, Math.pow(2, attempt) * 1000 + Math.random() * 500))
+          await new Promise((r) => setTimeout(r, Math.pow(2, attempt) * 1000 + Math.random() * 500))
           continue
         }
       }
@@ -81,7 +88,7 @@ async function fetchWithRetry(url: string, init: RequestInit, maxRetries = 2): P
     } catch (e) {
       lastErr = e
       if (attempt < maxRetries) {
-        await new Promise(r => setTimeout(r, Math.pow(2, attempt) * 1000))
+        await new Promise((r) => setTimeout(r, Math.pow(2, attempt) * 1000))
         continue
       }
       throw e
@@ -105,9 +112,18 @@ export const generateTextContent = createAsyncThunk<
   const { conversation, selectedModel, generationConfig, systemInstruction } = state.user
   const apiKey = getApiKey(state.user.API_KEY)
 
-  if (!apiKey) return thunkApi.rejectWithValue('Missing API key. Please sign in again or set VITE_GEMINI_API_KEY.')
+  if (!apiKey)
+    return thunkApi.rejectWithValue(
+      'Missing API key. Please sign in again or set VITE_GEMINI_API_KEY.'
+    )
 
-  const contents = buildContents(conversation.data, prompt, base64File ?? null, mimeType, systemInstruction)
+  const contents = buildContents(
+    conversation.data,
+    prompt,
+    base64File ?? null,
+    mimeType,
+    systemInstruction
+  )
 
   const body = JSON.stringify({
     contents,
@@ -130,7 +146,12 @@ export const generateTextContent = createAsyncThunk<
     return thunkApi.rejectWithValue('Network error. Please check your connection and retry.')
   }
 
-  const data: textResponse = await response.json().catch(() => ({ candidates: [], error: { message: 'Invalid JSON response' } } as unknown as textResponse))
+  const data: textResponse = await response
+    .json()
+    .catch(
+      () =>
+        ({ candidates: [], error: { message: 'Invalid JSON response' } }) as unknown as textResponse
+    )
 
   if (!response.ok) {
     return thunkApi.rejectWithValue(mapErrorMessage(response.status, data?.error?.message))
@@ -138,11 +159,17 @@ export const generateTextContent = createAsyncThunk<
 
   const aiAnswerText = data.candidates?.[0]?.content?.parts?.[0]?.text
   if (aiAnswerText === undefined) {
-    return thunkApi.rejectWithValue(data?.error?.message || 'No content returned from model. Try rephrasing.')
+    return thunkApi.rejectWithValue(
+      data?.error?.message || 'No content returned from model. Try rephrasing.'
+    )
   }
 
   const usage = data.usageMetadata
-    ? { promptTokens: data.usageMetadata.promptTokenCount, candidatesTokens: data.usageMetadata.candidatesTokenCount, totalTokens: data.usageMetadata.totalTokenCount }
+    ? {
+        promptTokens: data.usageMetadata.promptTokenCount,
+        candidatesTokens: data.usageMetadata.candidatesTokenCount,
+        totalTokens: data.usageMetadata.totalTokenCount,
+      }
     : undefined
 
   return { text: aiAnswerText, usage }
@@ -166,7 +193,13 @@ export const generateStreamContent = createAsyncThunk<
 
   if (!apiKey) return thunkApi.rejectWithValue('Missing API key.')
 
-  const contents = buildContents(conversation.data, prompt, base64File ?? null, mimeType, systemInstruction)
+  const contents = buildContents(
+    conversation.data,
+    prompt,
+    base64File ?? null,
+    mimeType,
+    systemInstruction
+  )
 
   const body = JSON.stringify({
     contents,
@@ -191,7 +224,9 @@ export const generateStreamContent = createAsyncThunk<
 
   if (!response.ok) {
     const data = await response.json().catch(() => ({ error: { message: 'Stream failed' } }))
-    return thunkApi.rejectWithValue(mapErrorMessage(response.status, (data as textResponse)?.error?.message))
+    return thunkApi.rejectWithValue(
+      mapErrorMessage(response.status, (data as textResponse)?.error?.message)
+    )
   }
 
   if (!response.body) {

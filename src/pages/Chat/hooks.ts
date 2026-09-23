@@ -1,8 +1,8 @@
 // hooks.ts
-import { useState, ChangeEvent, useRef, useEffect, useCallback, DragEvent } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { AppDispatch, RootState } from "../../store"
-import { generateTextContent, generateStreamContent } from "../../store/user/dispatchers.user"
+import { useState, ChangeEvent, useRef, useEffect, useCallback, DragEvent } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '../../store'
+import { generateTextContent, generateStreamContent } from '../../store/user/dispatchers.user'
 
 export const usePromptGenerator = () => {
   const [prompt, setPrompt] = useState('')
@@ -13,14 +13,12 @@ export const usePromptGenerator = () => {
   const [isDragging, setIsDragging] = useState(false)
   const dispatch: AppDispatch = useDispatch()
 
-  const { data, loading, error, generationConfig } = useSelector(
-    (state: RootState) => ({
-      data: state.user.conversation?.data || [],
-      loading: state.user.conversation?.loading || false,
-      error: state.user.conversation?.error || null,
-      generationConfig: state.user.generationConfig,
-    })
-  )
+  const { data, loading, error, generationConfig } = useSelector((state: RootState) => ({
+    data: state.user.conversation?.data || [],
+    loading: state.user.conversation?.loading || false,
+    error: state.user.conversation?.error || null,
+    generationConfig: state.user.generationConfig,
+  }))
 
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
@@ -45,7 +43,10 @@ export const usePromptGenerator = () => {
     }
     setFileMimeType(file.type || 'image/jpeg')
     const url = URL.createObjectURL(file)
-    setPreviewUrl((prev) => { if (prev) URL.revokeObjectURL(prev); return url })
+    setPreviewUrl((prev) => {
+      if (prev) URL.revokeObjectURL(prev)
+      return url
+    })
     const reader = new FileReader()
     reader.onload = () => {
       const base64String = (reader.result as string).split(',')[1]
@@ -62,26 +63,42 @@ export const usePromptGenerator = () => {
     setPrompt(e.target.value)
   }, [])
 
-  const handleFileChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) processFile(file)
-    // reset input to allow re-select same file
-    e.target.value = ''
-  }, [processFile])
+  const handleFileChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0]
+      if (file) processFile(file)
+      // reset input to allow re-select same file
+      e.target.value = ''
+    },
+    [processFile]
+  )
 
   const handleRemoveFile = useCallback(() => {
     setBase64File(null)
-    setPreviewUrl((prev) => { if (prev) URL.revokeObjectURL(prev); return null })
+    setPreviewUrl((prev) => {
+      if (prev) URL.revokeObjectURL(prev)
+      return null
+    })
     setFileError(null)
   }, [])
 
-  const handleDragOver = useCallback((e: DragEvent) => { e.preventDefault(); setIsDragging(true) }, [])
-  const handleDragLeave = useCallback((e: DragEvent) => { e.preventDefault(); setIsDragging(false) }, [])
-  const handleDrop = useCallback((e: DragEvent) => {
-    e.preventDefault(); setIsDragging(false)
-    const file = e.dataTransfer.files?.[0]
-    if (file) processFile(file)
-  }, [processFile])
+  const handleDragOver = useCallback((e: DragEvent) => {
+    e.preventDefault()
+    setIsDragging(true)
+  }, [])
+  const handleDragLeave = useCallback((e: DragEvent) => {
+    e.preventDefault()
+    setIsDragging(false)
+  }, [])
+  const handleDrop = useCallback(
+    (e: DragEvent) => {
+      e.preventDefault()
+      setIsDragging(false)
+      const file = e.dataTransfer.files?.[0]
+      if (file) processFile(file)
+    },
+    [processFile]
+  )
 
   const handleSendPrompt = useCallback(() => {
     if (prompt.trim() && !loading) {
@@ -91,17 +108,28 @@ export const usePromptGenerator = () => {
       handleRemoveFile()
       if (textareaRef.current) textareaRef.current.style.height = 'auto'
     }
-  }, [prompt, base64File, fileMimeType, generationConfig?.streaming, loading, dispatch, handleRemoveFile])
+  }, [
+    prompt,
+    base64File,
+    fileMimeType,
+    generationConfig?.streaming,
+    loading,
+    dispatch,
+    handleRemoveFile,
+  ])
 
-  const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault()
-      handleSendPrompt()
-    }
-  }, [handleSendPrompt])
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault()
+        handleSendPrompt()
+      }
+    },
+    [handleSendPrompt]
+  )
 
   const handleRegenerate = useCallback(() => {
-    const lastUser = [...data].reverse().find(m => m.type === 'outbound')
+    const lastUser = [...data].reverse().find((m) => m.type === 'outbound')
     if (lastUser && !loading) {
       const action = generationConfig?.streaming ? generateStreamContent : generateTextContent
       dispatch(action({ prompt: lastUser.message, base64File: null }))

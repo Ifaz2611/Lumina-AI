@@ -1,50 +1,171 @@
-// _variables.scss – central theming variables
-// Dark (default)
+// ─────────────────────────────────────────────────────────
+// LUMINA 2.0 — Design Tokens
+// Premium, editorial, calm. 3 themes: dark (default), light, midnight
+// ─────────────────────────────────────────────────────────
+
+// ── Shared primitives ───────────────────────────────
 :root {
-  --white: rgba(255,255,255,0.87);
-  --blue-color: #096EFF;
-  --blue-color-rgb: 9,110,255;
-  --background-color: hsl(0,0%,2%);
-  --text-color: var(--white);
-  --text-color-secondary: rgba(255,255,255,0.6);
-  --button-background: var(--blue-color);
-  --transparent-bg: transparent;
-  --light-border: 1px solid rgba(255,255,255,0.4);
-  --input-background: transparent;
-  --input-border: 1px solid rgba(255,255,255,0.4);
-  --setup-background: linear-gradient(121deg, rgba(255,255,255,0.07) -12.02%, rgba(255,255,255,0.01) 87.55%);
-  --input-focus-background: rgba(255,255,255,0.1);
-  --input-focus-border: rgba(255,255,255,0.5);
-  --setup-border: 1px solid transparent;
-  --gemini-font-color: linear-gradient(60deg, #598FF0, #B1C5FF);
+  // Type
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  // Radii
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  // Motion
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --dur-fast: 160ms;
+  --dur-med: 260ms;
+  --dur-slow: 420ms;
+
+  // Z
+  --z-header: 40;
+  --z-sidebar: 30;
+  --z-dropdown: 60;
+  --z-overlay: 70;
 }
 
-// Light
+// ── Dark (default) — Ink + violet glow ──────────────
+:root,
+.app-wrapper.dark {
+  --bg: #080a11;
+  --bg-elevated: #0f111a;
+  --bg-surface: #141722;
+  --bg-surface-hover: #1a1e2e;
+  --bg-muted: #1e2336;
+  --bg-input: #141722;
+  --bg-inverse: #f8f7f4;
+  --bg-overlay: rgba(8, 10, 17, 0.72);
+
+  --text: #f1f2f6;
+  --text-secondary: #9aa1b9;
+  --text-tertiary: #6b728e;
+  --text-inverse: #080a11;
+  --text-accent: #a78bfa;
+
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --border-focus: rgba(139, 92, 246, 0.5);
+  --divider: rgba(255, 255, 255, 0.06);
+
+  --accent: #7c3aed;
+  --accent-hover: #8b5cf6;
+  --accent-soft: rgba(124, 58, 237, 0.12);
+  --accent-glow: rgba(124, 58, 237, 0.35);
+  --accent-2: #06b6d4;
+  --accent-3: #ec4899;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3), 0 2px 6px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.45), 0 4px 16px rgba(0, 0, 0, 0.25);
+  --shadow-accent: 0 8px 32px rgba(124, 58, 237, 0.35);
+
+  // Legacy aliases (keep for compat)
+  --background-color: var(--bg);
+  --text-color: var(--text);
+  --text-color-secondary: var(--text-secondary);
+  --input-background: var(--bg-input);
+  --input-border: 1px solid var(--border);
+  --input-focus-background: var(--bg-surface);
+  --input-focus-border: var(--border-focus);
+  --light-border: 1px solid var(--border);
+  --setup-background: var(--bg-surface);
+  --setup-border: 1px solid var(--border);
+  --blue-color: var(--accent);
+  --blue-color-rgb: 124, 58, 237;
+  --white: #ffffff;
+  --gemini-font-color: linear-gradient(135deg, #a78bfa 0%, #60a5fa 45%, #22d3ee 100%);
+}
+
+// ── Light — Paper + ink ─────────────────────────────
 .app-wrapper.light {
-  --background-color: #eaeaea;
-  --text-color: #080808;
-  --text-color-secondary: rgba(0,0,0,0.6);
-  --input-background: rgba(198,198,198,0.1);
-  --input-border: 1px solid rgba(191,191,191,0.5);
-  --input-focus-background: rgba(229,229,229,0.1);
-  --input-focus-border: rgba(0,0,0,0.5);
-  --light-border: 1px solid rgba(8,8,8,0.2);
-  --setup-background: #efefeff5;
-  --setup-border: 1px solid rgba(8,8,8,0.24);
-  --gemini-font-color: linear-gradient(60deg, #598FF0, #096EFF);
+  --bg: #fcfcf9;
+  --bg-elevated: #ffffff;
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #f3f4f6;
+  --bg-muted: #f1f5f9;
+  --bg-input: #ffffff;
+  --bg-inverse: #080a11;
+  --bg-overlay: rgba(252, 252, 249, 0.8);
+
+  --text: #0f172a;
+  --text-secondary: #64748b;
+  --text-tertiary: #94a3b8;
+  --text-inverse: #f8f7f4;
+  --text-accent: #7c3aed;
+
+  --border: rgba(15, 23, 42, 0.08);
+  --border-strong: rgba(15, 23, 42, 0.14);
+  --border-focus: rgba(124, 58, 237, 0.35);
+  --divider: rgba(15, 23, 42, 0.06);
+
+  --accent-soft: rgba(124, 58, 237, 0.08);
+  --accent-glow: rgba(124, 58, 237, 0.18);
+
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08), 0 2px 6px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.12), 0 4px 16px rgba(15, 23, 42, 0.08);
+  --shadow-accent: 0 8px 24px rgba(124, 58, 237, 0.18);
+
+  --background-color: var(--bg);
+  --text-color: var(--text);
+  --text-color-secondary: var(--text-secondary);
+  --input-background: var(--bg-input);
+  --setup-background: var(--bg-surface);
+  --blue-color-rgb: 124, 58, 237;
+  --gemini-font-color: linear-gradient(135deg, #7c3aed 0%, #6366f1 50%, #06b6d4 100%);
 }
 
-// Midnight (new 3rd theme)
+// ── Midnight — Deep navy, cool ──────────────────────
 .app-wrapper.midnight {
-  --background-color: #0a0f1e;
-  --text-color: #e6edff;
-  --text-color-secondary: #9bb0d0;
-  --input-background: rgba(255,255,255,0.06);
-  --input-border: 1px solid rgba(100,130,200,0.3);
-  --input-focus-background: rgba(255,255,255,0.1);
-  --input-focus-border: rgba(100,150,255,0.6);
-  --light-border: 1px solid rgba(90,120,180,0.25);
-  --setup-background: linear-gradient(121deg, rgba(30,50,100,0.15) -12%, rgba(20,30,60,0.1) 87%);
-  --setup-border: 1px solid rgba(90,120,180,0.2);
-  --gemini-font-color: linear-gradient(60deg, #7aa3ff, #4d7cff);
+  --bg: #050a18;
+  --bg-elevated: #0a1430;
+  --bg-surface: #0f1e3a;
+  --bg-surface-hover: #16294f;
+  --bg-muted: #1a3355;
+  --bg-input: #0d1a33;
+  --bg-inverse: #e6eeff;
+  --bg-overlay: rgba(5, 10, 24, 0.75);
+
+  --text: #e6eeff;
+  --text-secondary: #8aa0c8;
+  --text-tertiary: #5b739d;
+  --text-inverse: #050a18;
+  --text-accent: #60a5fa;
+
+  --border: rgba(120, 160, 220, 0.12);
+  --border-strong: rgba(120, 160, 220, 0.2);
+  --border-focus: rgba(96, 165, 250, 0.45);
+  --divider: rgba(120, 160, 220, 0.08);
+
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
+  --accent-soft: rgba(59, 130, 246, 0.12);
+  --accent-glow: rgba(59, 130, 246, 0.3);
+  --accent-2: #22d3ee;
+  --accent-3: #a78bfa;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
+  --shadow-accent: 0 8px 32px rgba(59, 130, 246, 0.3);
+
+  --background-color: var(--bg);
+  --text-color: var(--text);
+  --text-color-secondary: var(--text-secondary);
+  --input-background: var(--bg-input);
+  --setup-background: var(--bg-surface);
+  --blue-color: var(--accent);
+  --blue-color-rgb: 59, 130, 246;
+  --gemini-font-color: linear-gradient(135deg, #60a5fa 0%, #22d3ee 60%, #a78bfa 100%);
 }
