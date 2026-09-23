@@ -7,6 +7,7 @@ import { generateTextContent } from "../../store/user/dispatchers.user"
 export const usePromptGenerator = () => {
   const [prompt, setPrompt] = useState('')
   const [base64File, setBase64File] = useState<string | null>(null)
+  const [fileMimeType, setFileMimeType] = useState<string>('image/jpeg')
   const dispatch: AppDispatch = useDispatch()
   
   const { data, loading, error } = useSelector(
@@ -30,6 +31,11 @@ export const usePromptGenerator = () => {
   const handleFileChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) {
+      if (file.size > 4 * 1024 * 1024) {
+        console.error("File too large (max 4MB)")
+        return
+      }
+      setFileMimeType(file.type || 'image/jpeg')
       const reader = new FileReader()
       reader.onload = () => {
         const base64String = (reader.result as string).split(',')[1]
@@ -45,7 +51,7 @@ export const usePromptGenerator = () => {
 
   const handleSendPrompt = useCallback(() => {
     if (prompt.trim() && !loading) {
-      dispatch(generateTextContent({ prompt: prompt.trim(), base64File }))
+      dispatch(generateTextContent({ prompt: prompt.trim(), base64File, mimeType: fileMimeType }))
       setPrompt('')
       setBase64File(null)
       
@@ -54,7 +60,7 @@ export const usePromptGenerator = () => {
         textareaRef.current.style.height = 'auto'
       }
     }
-  }, [prompt, base64File, loading, dispatch])
+  }, [prompt, base64File, fileMimeType, loading, dispatch])
 
   const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -73,6 +79,7 @@ export const usePromptGenerator = () => {
     textareaRef, 
     loading, 
     error, 
-    base64File 
+    base64File,
+    fileMimeType
   }
 }

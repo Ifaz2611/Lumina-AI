@@ -31,6 +31,7 @@ dist-ssr
 # Deployment
 .vercel
 
-# Private project analysis
-PROJECT_ANALYSIS.md
-
+# Env
+.env
+.env.local
+myself.md

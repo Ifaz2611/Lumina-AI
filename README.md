@@ -31,21 +31,21 @@ A modern, responsive, and feature-rich **React + TypeScript** chat interface bui
 
 ## 🛠 Tech Stack
 
-- **Framework**: React 18 + TypeScript  
-- **Build Tool**: Vite  
-- **State Management**: Redux Toolkit & Redux Persist  
-- **Styling**: SCSS / CSS Modules  
-- **Markdown Rendering**: `react-markdown`  
-- **Code Quality**: ESLint + TypeScript  
+- **Framework**: React 18 + TypeScript
+- **Build Tool**: Vite 5
+- **State Management**: Redux Toolkit & Redux Persist
+- **Styling**: SCSS / CSS Modules
+- **Markdown Rendering**: `react-markdown` + `remark-gfm`
+- **Icons**: `@iconify/react`
+- **Code Quality**: ESLint + TypeScript
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js (v16 or higher recommended)  
-- npm, yarn, or pnpm  
-- Docker & Docker Compose *(optional, for containerized deployment)*  
+- Node.js (v18 or higher recommended)  
+- npm, yarn, or pnpm
 
 ### Local Development
 
@@ -64,18 +64,6 @@ A modern, responsive, and feature-rich **React + TypeScript** chat interface bui
    npm start
    ```
    The app will be available at: **http://localhost:3000**
-
----
-
-### 🐳 Docker Deployment
-
-Run the application in a containerized environment:
-
-```bash
-docker compose up
-```
-
-The app will be accessible at: **http://localhost:5173**
 
 ---
 
@@ -108,14 +96,14 @@ Planned improvements and community-driven features:
 
 ## 📄 License
 
-This project is licensed under the **Apache 2.0 License**. See the `[:)]` file for details.
+This project is licensed under the **Apache 2.0 License**. See the `LICENSE` file for details.
 
 ---
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome!  
-Check the issues page [(github.com in Bing)](https://www.bing.com/search?q="https%3A%2F%2Fgithub.com%2FIfaz2611%2FLumina-AI%2Fissues") to get started.
+Contributions, issues, and feature requests are welcome!
+Check the [issues page](https://github.com/Ifaz2611/Lumina-AI/issues) to get started.
 
 ---
 
